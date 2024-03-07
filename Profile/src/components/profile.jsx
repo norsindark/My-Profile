@@ -28,7 +28,7 @@ function Profile() {
                                 <li>Home</li>
                             </ul>
                             <ul className="list-content ">
-                                <li>+84 376 985 395</li>
+                                <li>+84 376 XXX XXX</li>
                                 <li>norsindark@gmail.com</li>
                                 <li><a href="https://github.com/norsindark">SinD</a></li>
                                 <li>BMT - Dak Lak</li>

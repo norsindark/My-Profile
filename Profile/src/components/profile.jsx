@@ -58,7 +58,7 @@ function Profile() {
                                 <li>Github</li>
                                 <li>Home</li>
                             </ul>
-                            <ul className="list-content ">
+                            <ul className="list-content">
                                 <li>{phoneNumber}</li>
                                 <li>{email}</li>
                                 <li><a href={github}>{nameTag}</a></li>

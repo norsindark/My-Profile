@@ -1,23 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './profile.scss';
+import html2pdf from 'html2pdf.js';
 
 function Profile() {
+    const [name, setName] = useState('Nguyên Tuấn');
+    const [phoneNumber, setPhoneNumber] = useState('+84 376 985 ***');
+    const [email, setEmail] = useState('norsindark@gmail.com');
+    const [github, setGithub] = useState('https://github.com/norsindark');
+    const [location, setLocation] = useState('BMT - Dak Lak');
+    const [twitter, setTwitter] = useState('https://twitter.com/HaNguyenTuan2');
+    const [facebook, setFacebook] = useState('https://www.facebook.com/norsindark');
+    const [discord, setDiscord] = useState('https://discord.gg/KBan7Hs9');
+    const [nameTag, setNameTag] = useState('SinD');
+
+    const updateCVInfo = () => {
+        setName('Hà Nguyên Tuấn');
+        setPhoneNumber('+84 376 *** ***');
+        setEmail('norsinlight@gmail.com');
+        setGithub('https://github.com/norsindark');
+        setLocation('Tan Phu - Tp.HCM');
+        setTwitter('https://twitter.com/HaNguyenTuan2');
+        setFacebook('@norsindark');
+        setDiscord('SinD#0112');
+        setNameTag('NguyenTuan ');
+    };
+
+    const exportViewBoxAsPDF = () => {
+        const element = document.getElementById('resume-wrapper');
+        html2pdf()
+            .from(element)
+            .set({ width: 1500 })
+            .save('profile.pdf');
+    };
+
     return (
-        <div className="box">
+        <div className="box" id="box">
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-            <div className="resume-wrapper">
+            <div className="resume-wrapper" id='resume-wrapper'>
                 <section className="profile section-padding">
                     <div className="container">
                         <div className="picture-resume-wrapper">
                             <div className="picture-resume">
                                 <span>
-                                    <img src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/169746/Originals/avatar-anime.jpg" alt="" />
+                                    <img src="assets/imgs/avatar.png" alt="Avatar Image" />
                                 </span>
                             </div>
                             <div className="clearfix"></div>
                         </div>
                         <div className="name-wrapper">
-                            <h1>Nguyên <br />Tuấn</h1>
+                            <h1>{name}</h1>
                         </div>
                         <div className="clearfix"></div>
                         <div className="contact-info clearfix">
@@ -28,14 +59,14 @@ function Profile() {
                                 <li>Home</li>
                             </ul>
                             <ul className="list-content ">
-                                <li>+84 376 985 395</li>
-                                <li>norsindark@gmail.com</li>
-                                <li><a href="https://github.com/norsindark">SinD</a></li>
-                                <li>BMT - Dak Lak</li>
+                                <li>{phoneNumber}</li>
+                                <li>{email}</li>
+                                <li><a href={github}>{nameTag}</a></li>
+                                <li>{location}</li>
                             </ul>
                         </div>
                         <div className="contact-presentation">
-                            <p><span className="bold">Lorem</span> ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod congue nisi, nec consequat quam. In consectetur faucibus turpis eget laoreet. Sed nec imperdiet purus. </p>
+                            <p><span className="bold">Hobby</span> ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod congue nisi, nec consequat quam. In consectetur faucibus turpis eget laoreet. Sed nec imperdiet purus. </p>
                         </div>
                         <div className="contact-social clearfix">
                             <ul className="list-titles">
@@ -44,9 +75,9 @@ function Profile() {
                                 <li>Discord</li>
                             </ul>
                             <ul className="list-content">
-                                <li><a href="">@SinD</a></li>
-                                <li><a href="">SinD</a></li>
-                                <li><a href="">SinD</a></li>
+                                <li><a href={twitter}>{nameTag}</a></li>
+                                <li><a href={facebook}>{nameTag}</a></li>
+                                <li><a href={discord}>{nameTag}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -138,6 +169,8 @@ function Profile() {
 
                 <div className="clearfix"></div>
             </div>
+            <button onClick={updateCVInfo}>Update CV Info</button>
+            <button onClick={exportViewBoxAsPDF}>Export Views as PDF</button>
         </div>
     );
 }

@@ -87,9 +87,12 @@ a {
     min-height: 600px;
 }
 
-// .box {
-//     padding: 60px;
-// }
+.edit-mode input {
+    border: 1px solid #cdcdcd;
+    padding: 6px;
+    border-radius: 5px;
+    width: 260px;
+}
 
 /* Profile Section */
 .profile {

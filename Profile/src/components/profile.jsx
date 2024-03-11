@@ -12,18 +12,7 @@ function Profile() {
     const [facebook, setFacebook] = useState('https://www.facebook.com/norsindark');
     const [discord, setDiscord] = useState('https://discord.gg/KBan7Hs9');
     const [nameTag, setNameTag] = useState('SinD');
-
-    const updateCVInfo = () => {
-        setName('Hà Nguyên Tuấn');
-        setPhoneNumber('+84 376 *** ***');
-        setEmail('norsinlight@gmail.com');
-        setGithub('https://github.com/norsindark');
-        setLocation('Tan Phu - Tp.HCM');
-        setTwitter('https://twitter.com/HaNguyenTuan2');
-        setFacebook('@norsindark');
-        setDiscord('SinD#0112');
-        setNameTag('NguyenTuan ');
-    };
+    const [isEditMode, setIsEditMode] = useState(false);
 
     const exportViewBoxAsPDF = () => {
         const element = document.getElementById('resume-wrapper');
@@ -33,54 +22,133 @@ function Profile() {
             .save('profile.pdf');
     };
 
+    const toggleEditMode = () => {
+        setIsEditMode(!isEditMode);
+    }
+
+    const printToPdf = () => {
+        window.print();
+    }
+
+    const updateCVInfo = () => {
+        setIsEditMode(false);
+    }
+
     return (
         <div className="box" id="box">
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
             <div className="resume-wrapper" id='resume-wrapper'>
+
                 <section className="profile section-padding">
-                    <div className="container">
-                        <div className="picture-resume-wrapper">
-                            <div className="picture-resume">
-                                <span>
-                                    <img src="assets/imgs/avatar.png" alt="Avatar Image" />
-                                </span>
+                    {isEditMode ? (
+                        <div className="edit-mode">
+                            <div className="container">
+                                <div className="picture-resume-wrapper">
+                                    <div className="picture-resume">
+                                        <span>
+                                            <img src="assets/imgs/avatar.png" alt="Avatar Image" />
+                                        </span>
+                                    </div>
+                                    <div className="clearfix"></div>
+                                </div>
+                                <div className="name-wrapper">
+                                    <h1> <input type="text" value={name} onChange={(e) => setName(e.target.value)} /></h1>
+                                </div>
+                                <div className="clearfix"></div>
+                                <div className="contact-info clearfix">
+                                    <ul className="list-titles">
+                                        <li>Call</li>
+                                        <li>Mail</li>
+                                        <li>Github</li>
+                                        <li>Home</li>
+                                    </ul>
+                                    <ul className="list-content">
+                                        <li>
+                                            <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                                        </li>
+                                        <li>
+                                            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                        </li>
+                                        <li><a href={github}>
+                                            <input type="text" value={github} onChange={(e) => setGithub(e.target.value)} />
+                                        </a></li>
+                                        <li>
+                                            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="contact-presentation">
+                                    <p><span className="bold">Hobby</span> ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod congue nisi, nec consequat quam. In consectetur faucibus turpis eget laoreet. Sed nec imperdiet purus. </p>
+                                </div>
+                                <div className="contact-social clearfix">
+                                    <ul className="list-titles">
+                                        <li>Twitter</li>
+                                        <li>FB</li>
+                                        <li>Discord</li>
+                                    </ul>
+                                    <ul className="list-content">
+                                        <li>
+                                            <input type="text" value={twitter} onChange={(e) => setTwitter(e.target.value)} />
+                                        </li>
+                                        <li>
+                                            <input type="text" value={facebook} onChange={(e) => setFacebook(e.target.value)} />
+                                        </li>
+
+                                        <li>
+                                            <input type="text" value={discord} onChange={(e) => setDiscord(e.target.value)} />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {/* <input type="text" value={nameTag} onChange={(e) => setNameTag(e.target.value)} /> */}
+                            <button onClick={updateCVInfo}>Save</button>
+                        </div>
+                    ) : (
+                        <div className="container">
+                            <div className="picture-resume-wrapper">
+                                <div className="picture-resume">
+                                    <span>
+                                        <img src="assets/imgs/avatar.png" alt="Avatar Image" />
+                                    </span>
+                                </div>
+                                <div className="clearfix"></div>
+                            </div>
+                            <div className="name-wrapper">
+                                <h1>{name}</h1>
                             </div>
                             <div className="clearfix"></div>
+                            <div className="contact-info clearfix">
+                                <ul className="list-titles">
+                                    <li>Call</li>
+                                    <li>Mail</li>
+                                    <li>Github</li>
+                                    <li>Home</li>
+                                </ul>
+                                <ul className="list-content">
+                                    <li>{phoneNumber}</li>
+                                    <li>{email}</li>
+                                    <li><a href={github}>{nameTag}</a></li>
+                                    <li>{location}</li>
+                                </ul>
+                            </div>
+                            <div className="contact-presentation">
+                                <p><span className="bold">Hobby</span> ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod congue nisi, nec consequat quam. In consectetur faucibus turpis eget laoreet. Sed nec imperdiet purus. </p>
+                            </div>
+                            <div className="contact-social clearfix">
+                                <ul className="list-titles">
+                                    <li>Twitter</li>
+                                    <li>FB</li>
+                                    <li>Discord</li>
+                                </ul>
+                                <ul className="list-content">
+                                    <li><a href={twitter}>{nameTag}</a></li>
+                                    <li><a href={facebook}>{nameTag}</a></li>
+                                    <li><a href={discord}>{nameTag}</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div className="name-wrapper">
-                            <h1>{name}</h1>
-                        </div>
-                        <div className="clearfix"></div>
-                        <div className="contact-info clearfix">
-                            <ul className="list-titles">
-                                <li>Call</li>
-                                <li>Mail</li>
-                                <li>Github</li>
-                                <li>Home</li>
-                            </ul>
-                            <ul className="list-content">
-                                <li>{phoneNumber}</li>
-                                <li>{email}</li>
-                                <li><a href={github}>{nameTag}</a></li>
-                                <li>{location}</li>
-                            </ul>
-                        </div>
-                        <div className="contact-presentation">
-                            <p><span className="bold">Hobby</span> ipsum dolor sit amet, consectetur adipiscing elit. Vivamus euismod congue nisi, nec consequat quam. In consectetur faucibus turpis eget laoreet. Sed nec imperdiet purus. </p>
-                        </div>
-                        <div className="contact-social clearfix">
-                            <ul className="list-titles">
-                                <li>Twitter</li>
-                                <li>FB</li>
-                                <li>Discord</li>
-                            </ul>
-                            <ul className="list-content">
-                                <li><a href={twitter}>{nameTag}</a></li>
-                                <li><a href={facebook}>{nameTag}</a></li>
-                                <li><a href={discord}>{nameTag}</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    )}
                 </section>
 
                 <section className="experience section-padding">
@@ -169,8 +237,11 @@ function Profile() {
 
                 <div className="clearfix"></div>
             </div>
-            <button onClick={updateCVInfo}>Update CV Info</button>
             <button onClick={exportViewBoxAsPDF}>Export Views as PDF</button>
+            <button onClick={printToPdf}>Print PDF</button>
+            <button onClick={toggleEditMode}>
+                {isEditMode ? "Exit Edit Mode" : "Enter Edit Mode"}
+            </button>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './profile.scss';
 import html2pdf from 'html2pdf.js';
+// import Api from '../apis/Api';
 
 function Profile() {
     const [name, setName] = useState('Nguyên Tuấn');
